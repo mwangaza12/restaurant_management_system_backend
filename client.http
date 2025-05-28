@@ -1,0 +1,81 @@
+// Default route
+
+###
+GET  http://localhost:5000/
+
+###
+GET  http://localhost:5000/api/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoidGlwc3lAZXhhbXBsZS5jb20iLCJmdWxsTmFtZSI6IlRpcHN5IEciLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQ4NDQ4MzUxLCJleHAiOjE3NDg0NTE5NTF9.2nQuOPU6d1_D_cwZYaf7xZv5svBKM5fEFAwfGurWVJQ
+
+###
+GET  http://localhost:5000/api/users/4
+Authorization: 
+
+
+###
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+    "fullName": "Tipsy",
+    "email": "tipsy@example.com",
+    "password": "12345678",
+    "userType": "admin"
+}
+
+###
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "tipsy@example.com",
+    "password": "12345678"
+}
+
+###
+PUT  http://localhost:5000/api/users/4
+Authorization: 
+Content-Type: application/json
+
+{
+    "fullName": "John Updated",
+    "email": "denis@example.com",
+    "password": "password3"
+}
+
+###
+DELETE  http://localhost:5000/api/users/4
+
+
+###
+GET http://localhost:5000/api/states
+
+###
+GET http://localhost:5000/api/states/3
+
+### 
+POST http://localhost:5000/api/states
+Content-Type: application/json
+
+{
+    "stateName": "New State",
+    "stateCode": "NS"
+}
+
+### 
+PUT  http://localhost:5000/api/states/3
+Content-Type: application/json
+
+{
+    "stateName": "New State Updated",
+    "stateCode": "NS"
+}
+
+###
+DELETE  http://localhost:5000/api/states/3
+
+
+// cities
+###
+GET http://localhost:5000/api/cities
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImVtYWlsIjoidGlwc3lAZXhhbXBsZS5jb20iLCJmdWxsTmFtZSI6IlRpcHN5IEciLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzQ4NDQ4MzUxLCJleHAiOjE3NDg0NTE5NTF9.2nQuOPU6d1_D_cwZYaf7xZv5svBKM5fEFAwfGurWVJQ
