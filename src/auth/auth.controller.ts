@@ -1,69 +1,80 @@
 import { Request, Response } from "express";
+import { createUserServices, getUserByEmailService } from "./auth.service";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { createUserServices, getUserByEmailService } from "./auth.service";
+import { UserLoginValidator, UserValidator } from "../validation/user.validator";
 
-// Register Logic
-export const createUser = async (req: Request, res: Response) => {
+
+export const createUser = async (req: Request, res: Response) => {     
     try {
-        const { fullName, email, password, userType } = req.body;
+         // Validate user input
+        const parseResult = UserValidator.safeParse(req.body);
+        if (!parseResult.success) {
+             res.status(400).json({ error: parseResult.error.issues });
+             return;
+        }
+        const user = parseResult.data;
+        const userEmail = user.email;
 
-        if (!fullName || !email || !password) {
-            res.status(400).json({ error: "All fields are required" });
+        const existingUser = await getUserByEmailService(userEmail);
+        if (existingUser) {
+            res.status(400).json({ error: "User with this email already exists" });
             return;
         }
 
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
+        // Genereate hashed password
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(user.password,salt);
+        user.password = hashedPassword;
 
-        const userToCreate = { fullName, email, password: hashedPassword, userType };
-        const newUser = await createUserServices(userToCreate);
+        // Call the service to create the user
+        const newUser = await createUserServices(user);     
+        res.status(201).json(newUser);    
 
-        res.status(201).json({ message: newUser });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal server error" });
+    } catch (error:any) {
+        res.status(500).json({ error:error.message || "Failed to create user" });
     }
-};
+}
 
-// Login Logic
+//Login User
 export const loginUser = async (req: Request, res: Response) => {
-    const { email, password } = req.body;
-
     try {
-        const existingUser = await getUserByEmailService(email);
+        const parseResult = UserLoginValidator.safeParse(req.body);
+        if (!parseResult.success) {
+            res.status(400).json({ error: parseResult.error.issues });
+            return;
+        }
+        const { email, password } = parseResult.data;
 
-        if (!existingUser) {
+        // Check if user exists
+        const user = await getUserByEmailService(email);
+        // console.log("🚀 ~ loginUser ~ user:", user)
+        if (!user) {
             res.status(404).json({ error: "User not found" });
             return;
         }
 
-        const isMatch = await bcrypt.compare(password, existingUser.password);
-
+        // Compare passwords
+        const isMatch = bcrypt.compareSync(password, user.password);
         if (!isMatch) {
-            res.status(401).json({ error: "Invalid password" });
-            return;
+             res.status(401).json({ error: "Invalid password" });
+             return;
         }
 
-        const payload = {
-            userId: existingUser.userId,
-            email: existingUser.email,
-            fullName: existingUser.fullName,
-            userType: existingUser.userType
-        };
+        //Generate a token
+        let payload ={
+            userId: user.userId,
+            email: user.email,
+            userType: user.userType,
+            //expiresIn: "1h" // Optional: Set token expiration
+            exp: Math.floor(Date.now() / 1000) + (60 * 60) // Token expires in 1 hour
+        }
 
-        const secret = process.env.JWT_SECRET as string;
-        const token = jwt.sign(payload, secret, { expiresIn: '1h' });
+        let secret = process.env.JWT_SECRET as string;
+        const token = jwt.sign(payload, secret);
 
-        res.status(200).json({
-            token,
-            userId: existingUser.userId,
-            email: existingUser.email,
-            fullName: existingUser.fullName,
-            userType: existingUser.userType
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal server error" });
+        res.status(200).json({ token, userId: user.userId, email: user.email, userType: user.userType });
+    } catch (error:any) {
+        res.status(500).json({ error:error.message || "Failed to login user" });
     }
-};
+}
