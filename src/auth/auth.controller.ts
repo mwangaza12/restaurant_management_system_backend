@@ -9,7 +9,8 @@ export const createUser = async (req: Request, res: Response) => {
         const { fullName, email, password, userType } = req.body;
 
         if (!fullName || !email || !password) {
-            return res.status(400).json({ error: "All fields are required" });
+            res.status(400).json({ error: "All fields are required" });
+            return;
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -33,13 +34,15 @@ export const loginUser = async (req: Request, res: Response) => {
         const existingUser = await getUserByEmailService(email);
 
         if (!existingUser) {
-            return res.status(404).json({ error: "User not found" });
+            res.status(404).json({ error: "User not found" });
+            return;
         }
 
         const isMatch = await bcrypt.compare(password, existingUser.password);
 
         if (!isMatch) {
-            return res.status(401).json({ error: "Invalid password" });
+            res.status(401).json({ error: "Invalid password" });
+            return;
         }
 
         const payload = {

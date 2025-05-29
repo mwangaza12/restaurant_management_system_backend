@@ -23,7 +23,15 @@ export const getCitysServices = async():Promise<TCitySelect[] | null> => {
 //Get city by ID
 export const getCityByIdServices = async(cityId: number):Promise<TCitySelect | undefined> => {
      return await db.query.cityTable.findFirst({
-        where: eq(cityTable.cityId, cityId)
+        where: eq(cityTable.cityId, cityId),
+        with:{
+            state:{
+                columns:{
+                    stateName: true,
+                    stateCode: true
+                }
+            }
+        }
     })  
 }
 

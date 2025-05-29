@@ -22,7 +22,14 @@ export const getStatesServices = async():Promise<TStateSelect[] | null> => {
 //Get State by ID
 export const getStateByIdServices = async(stateId: number):Promise<TStateSelect | undefined> => {
      return await db.query.stateTable.findFirst({
-        where: eq(stateTable.stateId, stateId)
+        where: eq(stateTable.stateId, stateId),
+        with: {
+            cities: {
+                columns:{
+                    cityName: true
+                }
+            }
+        }
     })  
 }
  

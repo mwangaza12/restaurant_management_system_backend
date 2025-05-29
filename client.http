@@ -79,8 +79,19 @@ DELETE  http://localhost:5000/api/states/3
 GET http://localhost:5000/api/cities
 Authorization: token
 
+###
+GET http://localhost:5000/api/cities/1
+Authorization: token
+
+
 //states
 
 ###
 GET http://localhost:5000/api/states
 Authorization: token
+
+###
+GET http://localhost:5000/api/states/1 
+Authorization: token
+
+
