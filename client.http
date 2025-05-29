@@ -5,7 +5,7 @@ GET  http://localhost:5000/
 
 ###
 GET  http://localhost:5000/api/users
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJmdWxsTmFtZSI6IkFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTc0ODQ5OTkzMywiZXhwIjoxNzQ4NTAzNTMzfQ.GX-ZwClj4mVgYt4IcOLhpyIDhKeG2eWQw-Ry5MIadcs
+Authorization: token
 
 ###
 GET  http://localhost:5000/api/users/4
@@ -77,10 +77,10 @@ DELETE  http://localhost:5000/api/states/3
 // cities
 ###
 GET http://localhost:5000/api/cities
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJmdWxsTmFtZSI6IkFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTc0ODQ5OTkzMywiZXhwIjoxNzQ4NTAzNTMzfQ.GX-ZwClj4mVgYt4IcOLhpyIDhKeG2eWQw-Ry5MIadcs
+Authorization: token
 
 //states
 
 ###
 GET http://localhost:5000/api/states
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJmdWxsTmFtZSI6IkFkbWluIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTc0ODUwNTIwNywiZXhwIjoxNzQ4NTA4ODA3fQ.XGhAi3XZFBXpSLRwCPEWuQ1bbD3YrQQFJinPDbquoqA
+Authorization: token
