@@ -8,7 +8,15 @@ import { TStateInsert, TStateSelect,  stateTable } from "../drizzle/schema";
  
 //Get all States
 export const getStatesServices = async():Promise<TStateSelect[] | null> => {
-    return await db.query.stateTable.findMany({});
+    return await db.query.stateTable.findMany({
+        with: {
+            cities: {
+                columns:{
+                    cityName: true
+                }
+            }
+        }
+    });
 }
  
 //Get State by ID

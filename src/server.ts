@@ -24,7 +24,7 @@ app.get("/", (req, res: Response) => {
 
 // Mount routers with specific prefixes
 app.use("/api/users", userRouter);
-app.use("/api/states", stateRouter);
+app.use("/api/states", adminRoleAuth, stateRouter);
 app.use("/api/cities", adminRoleAuth,cityRouter);
 app.use("/api/auth", authRouter);
 

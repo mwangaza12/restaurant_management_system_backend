@@ -8,7 +8,16 @@ import { cityTable, TCityInsert, TCitySelect } from "../drizzle/schema";
 
 //Get all citys
 export const getCitysServices = async():Promise<TCitySelect[] | null> => {
-    return await db.query.cityTable.findMany({});
+    return await db.query.cityTable.findMany({
+        with:{
+            state:{
+                columns:{
+                    stateName: true,
+                    stateCode: true
+                }
+            }
+        }
+    });
 }
 
 //Get city by ID
