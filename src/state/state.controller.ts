@@ -2,8 +2,6 @@ import { Request, Response } from "express";
 import { createStateServices, deleteStateServices, getStateByIdServices, getStatesServices, updateStateServices } from "./state.service";
  
 //Business logic for state-related operations
- 
- 
 export const getStates = async (req: Request, res: Response) => {
     try {
         const allStates = await getStatesServices();

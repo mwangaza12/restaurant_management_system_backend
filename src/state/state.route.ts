@@ -5,7 +5,6 @@ export const stateRouter = Router();
 
 // State routes definition
 
-
 // Get all users
 stateRouter.get('/', getStates);
 
