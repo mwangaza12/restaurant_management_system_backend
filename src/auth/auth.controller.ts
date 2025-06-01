@@ -4,7 +4,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { UserLoginValidator, UserValidator } from "../validation/user.validator";
 
-
 export const createUser = async (req: Request, res: Response) => {     
     try {
          // Validate user input
