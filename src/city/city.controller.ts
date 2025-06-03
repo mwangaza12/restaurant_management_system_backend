@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { createCityServices, deleteCityServices, getCityByIdServices, getCitysServices, updateCityServices } from "./city.service";
+import { CityValidator } from "../validation/city.validator";
 
 //Business logic for cities-related operations
 
@@ -35,13 +36,20 @@ export const getCityById = async (req: Request, res: Response) => {
 }
 
 export const createCity = async (req: Request, res: Response) => {
-    const { cityName, stateId } = req.body;
-    if (!cityName || !stateId) {
+    const parseResult = CityValidator.safeParse(req.body);
+    if (!parseResult.success) {
+        res.status(400).json({ error: parseResult.error.issues });
+        return; // Prevent further execution
+    }
+    // Extract validated data
+    const city = parseResult.data;
+    // Ensure required fields are present
+    if (!city.cityName || !city.stateId) {
         res.status(400).json({ error: "All fields are required" });
         return; // Prevent further execution
     }
     try {
-        const newCity = await createCityServices({ cityName, stateId });
+        const newCity = await createCityServices(city);
         if (newCity == null) {
             res.status(500).json({ message: "Failed to create city" });
         } else {

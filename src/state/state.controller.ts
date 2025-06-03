@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { createStateServices, deleteStateServices, getStateByIdServices, getStatesServices, updateStateServices } from "./state.service";
+import { StateValidator } from "../validation/state.validator";
  
 //Business logic for state-related operations
 export const getStates = async (req: Request, res: Response) => {
@@ -34,13 +35,20 @@ export const getStateById = async (req: Request, res: Response) => {
 }
  
 export const createState = async (req: Request, res: Response) => {
-    const { stateName, stateCode} = req.body;
-    if (!stateName || !stateCode) {
+    // Validate request body
+    const parseResult = StateValidator.safeParse(req.body); 
+    if (!parseResult.success) {
+        res.status(400).json({ error: parseResult.error.issues });
+        return; // Prevent further execution
+    }
+    // Extract validated data
+    const state = parseResult.data;
+    if (!state.stateName || !state.stateCode) {
         res.status(400).json({ error: "All fields are required" });
         return; // Prevent further execution
     }
     try {
-        const newState = await createStateServices({ stateName, stateCode});
+        const newState = await createStateServices(state);
         if (newState == null) {
             res.status(500).json({ message: "Failed to create State" });
         } else {
