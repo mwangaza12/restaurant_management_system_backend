@@ -17,6 +17,5 @@ stateRouter.post('/', createState);
 // Update an existing user
 stateRouter.put('/:id',updateState);
 
-
 // Delete an existing user
 stateRouter.delete('/:id', deleteState);

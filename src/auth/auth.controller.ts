@@ -3,6 +3,7 @@ import { createUserServices, getUserByEmailService } from "./auth.service";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { UserLoginValidator, UserValidator } from "../validation/user.validator";
+import { sendNotificationEmail } from "../middleware/googleMailer";
 
 export const createUser = async (req: Request, res: Response) => {     
     try {
@@ -27,7 +28,14 @@ export const createUser = async (req: Request, res: Response) => {
         user.password = hashedPassword;
 
         // Call the service to create the user
-        const newUser = await createUserServices(user);     
+        const newUser = await createUserServices(user);
+        const results = await sendNotificationEmail(user.email, user.fullName, "Account created successfully", "Welcome to our food service</b>");
+        if (!results) {
+            res.status(500).json({ error: "Failed to send notification email" });
+            return;
+        }else {
+            console.log("Email sent successfully:", results);
+        }     
         res.status(201).json(newUser);    
 
     } catch (error:any) {
