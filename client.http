@@ -57,7 +57,7 @@ GET http://localhost:5000/api/states/3
 ### 
 POST http://localhost:5000/api/states
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJ1c2VyVHlwZSI6ImFkbWluIiwiZXhwIjoxNzQ4OTQ0MTUwLCJpYXQiOjE3NDg5NDA1NTB9.ZRAxAqi7mIyTiwV17ZgZpwZJ9usvJgCmevUOOFhUT8E
+Authorization: token
 
 {
     "stateName": "NeState",
@@ -80,7 +80,7 @@ DELETE  http://localhost:5000/api/states/3
 // CITIES
 ###
 GET http://localhost:5000/api/cities
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJ1c2VyVHlwZSI6ImFkbWluIiwiZXhwIjoxNzQ4OTQ0MTUwLCJpYXQiOjE3NDg5NDA1NTB9.ZRAxAqi7mIyTiwV17ZgZpwZJ9usvJgCmevUOOFhUT8E
+Authorization: token
 
 ###
 GET http://localhost:5000/api/cities/1
@@ -90,7 +90,7 @@ Authorization: token
 ###
 POST http://localhost:5000/api/cities
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJ1c2VyVHlwZSI6ImFkbWluIiwiZXhwIjoxNzQ4OTQ0MTUwLCJpYXQiOjE3NDg5NDA1NTB9.ZRAxAqi7mIyTiwV17ZgZpwZJ9usvJgCmevUOOFhUT8E
+Authorization: token
 
 {
     "cityName": "New City",
