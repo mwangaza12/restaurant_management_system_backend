@@ -29,7 +29,7 @@ const transporter = nodeMailer.createTransport({
 // });
 
 
-export const sendNotificationEmail = async (email: string, subject: string, fullName: string, message: string, html?: string) => {
+export const sendNotificationEmail = async (email: string, subject: string, fullName: string | null, message: string, html?: string) => {
     try {
         const transporter = nodeMailer.createTransport({
             service: "gmail",
