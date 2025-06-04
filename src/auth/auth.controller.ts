@@ -30,14 +30,14 @@ export const createUser = async (req: Request, res: Response) => {
 
         // Call the service to create the user
         const newUser = await createUserServices(user);
-        const results = await sendNotificationEmail(user.email, user.fullName, "Account created successfully", "Welcome to our food service</b>");
-        if (!results) {
-            res.status(500).json({ error: "Failed to send notification email" });
-            return;
-        }else {
-            console.log("Email sent successfully:", results);
-        }     
-        res.status(201).json(newUser);    
+        // const results = await sendNotificationEmail(user.email, user.fullName, "Account created successfully", "Welcome to our food service</b>");
+        // if (!results) {
+        //     res.status(500).json({ error: "Failed to send notification email" });
+        //     return;
+        // }else {
+        //     console.log("Email sent successfully:", results);
+        // }     
+        res.status(201).json({message: newUser});    
 
     } catch (error:any) {
         res.status(500).json({ error:error.message || "Failed to create user" });

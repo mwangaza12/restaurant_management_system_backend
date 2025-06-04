@@ -17,7 +17,7 @@ Content-Type: application/json
 
 {
     "fullName": "Joseph Admin",
-    "email": "email@gmail.com",
+    "email": "josepmwangaza1@gmail.com",
     "password": "12345678",
     "userType": "admin"
 }
@@ -27,8 +27,8 @@ POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-    "email": "email@gmail.com",
-    "password": "12345678"
+    "email": "josephmwangaza1@gmail.com",
+    "password": "mwangaza1234"
 }
 
 ###
@@ -102,10 +102,10 @@ POST http://localhost:5000/api/auth/password-reset
 Content-Type: application/json
 
 {
-    "email": "example@gmail.com"
+    "email": "josephmwangaza1@gmail.com"
 }
 ###
-PUT http://localhost:5000/api/auth/reset/<token>
+PUT http://localhost:5000/api/auth/reset/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksImlhdCI6MTc0ODk0ODU3MCwiZXhwIjoxNzQ4OTUyMTcwfQ.X4WmYof-w5UEMxi8SxgJOf-HNASfCEuOpxwiWdlQsXU
 Content-Type: application/json
 
 {

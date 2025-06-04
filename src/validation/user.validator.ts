@@ -5,6 +5,7 @@ export const UserValidator = z.object({
   email: z.email().trim(),
   fullName: z.string().min(5).max(100).trim(),
   password: z.string().min(4).max(100).trim(),
+  userType: z.enum(["admin", "member"]).default("member"),
 });
 
 export const UserLoginValidator = z.object({
