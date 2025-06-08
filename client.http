@@ -16,8 +16,8 @@ POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-    "fullName": "Joseph Admin",
-    "email": "josepmwangaza1@gmail.com",
+    "fullName": "Joseph Mokoli",
+    "email": "josephmwangaza1@gmail.com",
     "password": "12345678",
     "userType": "admin"
 }
@@ -27,9 +27,21 @@ POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-    "email": "josephmwangaza1@gmail.com",
-    "password": "mwangaza1234"
+    "email": "josepmwangaza1@gmail.com",
+    "password": "12345678"
 }
+
+
+// VERIFICATION
+###
+PUT  http://localhost:5000/api/auth/verify-email
+Content-Type: application/json
+
+{
+    "email": "josephmwangaza1@gmail.com",
+    "otp": 385790
+}
+
 
 ###
 PUT  http://localhost:5000/api/users/4

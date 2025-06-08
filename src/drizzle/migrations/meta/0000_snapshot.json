@@ -1,5 +1,5 @@
 {
-  "id": "6635dd0b-f49f-46a5-aa86-cd9cce704287",
+  "id": "729a3f16-e534-40da-a86d-917dbd823521",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -258,6 +258,20 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": true
+        },
+        "isVerified": {
+          "name": "isVerified",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "otp": {
+          "name": "otp",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
         },
         "password": {
           "name": "password",

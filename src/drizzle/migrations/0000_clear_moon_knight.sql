@@ -35,6 +35,8 @@ CREATE TABLE "userTable" (
 	"userId" serial PRIMARY KEY NOT NULL,
 	"fullName" varchar,
 	"email" varchar NOT NULL,
+	"isVerified" boolean DEFAULT false,
+	"otp" integer DEFAULT 0,
 	"password" varchar NOT NULL,
 	"userType" "userType" DEFAULT 'member',
 	"createdAt" timestamp DEFAULT now(),

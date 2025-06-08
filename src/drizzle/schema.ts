@@ -1,4 +1,5 @@
 import { relations } from "drizzle-orm";
+import { boolean } from "drizzle-orm/pg-core";
 import { pgEnum } from "drizzle-orm/pg-core";
 import { pgTable, serial,text, timestamp,integer,varchar } from "drizzle-orm/pg-core";
  
@@ -39,6 +40,8 @@ export const userTable = pgTable( "userTable",{
     userId: serial("userId").primaryKey(),
     fullName: varchar("fullName"),
     email: varchar("email").notNull(),
+    isVerified: boolean("isVerified").default(false), // default to 'false' for unverified users
+    otp: integer("otp").default(0), // default to 0 for no OTP
     password: varchar("password").notNull(),
     userType: roleEnum("userType").default('member'),
     createdAt: timestamp('createdAt').defaultNow(),

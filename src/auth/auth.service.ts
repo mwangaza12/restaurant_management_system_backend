@@ -30,3 +30,16 @@ export const updateUserPasswordService = async (email: string, newPassword: stri
     
     return "Password updated successfully";
 }
+
+export const updateVerificationStatusService = async (email: string, status: boolean, otp:null ): Promise<string> => {
+    const result = await db.update(userTable)
+        .set({ isVerified: status, otp: otp })
+        .where(eq(userTable.email, email))
+        .returning();
+
+    if (result.length === 0) {
+        throw new Error("User not found or verification status update failed");
+    }
+    
+    return "Verification status updated successfully";
+}
